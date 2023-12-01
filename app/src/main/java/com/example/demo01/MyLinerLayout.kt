@@ -16,8 +16,8 @@ class MyLinerLayout(context: Context, attrs: AttributeSet) : LinearLayout(contex
 //        return false
 //    }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return false
-    }
+//    override fun onTouchEvent(event: MotionEvent?): Boolean {
+//        return super.onTouchEvent(event)
+//    }
 
 }

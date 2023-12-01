@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#aabbcc">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="fragment test"
+        android:gravity="center"
+        />
+    <com.example.demo01.widget.CustomView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:customTitle="组合自定义属性"
+        app:customIcon="@drawable/ic_launcher_background"
+        />
+</LinearLayout>
