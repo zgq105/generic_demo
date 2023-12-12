@@ -9,8 +9,7 @@ import java.io.IOException
 
 class OkhttpHelper {
     fun test() {
-        val client = OkHttpClient()
-
+        val client = OkHttpClient.Builder().build()
         // 创建一个 Request 对象
         val request = Request.Builder()
             .url("https://www.example.com")

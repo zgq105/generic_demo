@@ -20,12 +20,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Demo01"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".activity.NavigationActivity"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.AppCompat" />-->
         <activity
-            android:name=".Main3Activity"
-            android:theme="@style/Theme.AppCompat"
-            android:exported="false" />
+            android:name=".activity.Main3Activity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name=".BActivity"
+            android:name=".activity.BActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat">
             <intent-filter>
@@ -39,10 +43,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".activity.MainActivity2"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat">
@@ -52,6 +56,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.StubActivity"
+            android:theme="@style/Theme.AppCompat"/>
 
         <service android:name=".service.HelloService" />
         <service android:name=".service.HelloIntentService" />

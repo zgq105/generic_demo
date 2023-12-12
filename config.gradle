@@ -1,0 +1,5 @@
+ext {
+    modulueSetting = [module1IsModule = true]
+
+    ccc = true
+}

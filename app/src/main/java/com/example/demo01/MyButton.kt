@@ -14,6 +14,6 @@ class MyButton(context: Context, attrs: AttributeSet) :
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         Log.d("zgq","onTouchEvent")
-        return false
+        return super.onTouchEvent(event)
     }
 }

@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    //id("androidx.navigation.safeargs.kotlin").version("2.5.3")
 }
 
 android {
@@ -81,6 +82,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.constraintlayout)
     implementation(project(":module1"))
+    implementation(project(":nativelib_m3"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -94,6 +96,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.fragment:fragment-ktx:1.5.5")
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+    //debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
 
 }

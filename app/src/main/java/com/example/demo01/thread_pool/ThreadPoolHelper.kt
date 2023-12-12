@@ -1,10 +1,13 @@
 package com.example.demo01.thread_pool
 
 import android.util.Log
+import java.util.concurrent.Callable
 import java.util.concurrent.Executors
+import java.util.concurrent.FutureTask
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.locks.ReentrantLock
 
 class ThreadPoolHelper {
 
@@ -30,7 +33,7 @@ class ThreadPoolHelper {
         for (i in 0..30) {
             executorService2.execute {
                 Thread.sleep(300)
-                Log.d(TAG, "newSingleThreadExecutor:$i")
+                //Log.d(TAG, "newSingleThreadExecutor:$i")
             }
         }
 
@@ -54,9 +57,31 @@ class ThreadPoolHelper {
     }
 
     fun test() {
-        val linkedBlockingQueue = LinkedBlockingQueue<Int>(2);
-        for (i in 0..10) {
-            linkedBlockingQueue.offer(i)
+        val executorService = Executors.newSingleThreadExecutor()
+//       val future =  executorService.submit(Callable {
+//            Thread.sleep(5000)
+//            Log.d(TAG, "Callable:"+Thread.currentThread().name)
+//        })
+//        Executors.newSingleThreadExecutor().execute {
+//            Log.d(TAG, "Runnable:"+Thread.currentThread().name)
+//            future.cancel(true)
+//        }
+
+        Executors.newSingleThreadExecutor().execute {
+
+            val futureTask = FutureTask<String> {
+                Thread.sleep(5000)
+                "finish"
+            }
+            executorService.submit(futureTask)
+            //阻塞当前线程
+            val result = futureTask.get()
+            Log.d(TAG, "futureTask-result:$result")
         }
     }
+
+
+    data class A(val i:Int)
+
+
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_1"
+            android:icon="@mipmap/a1"
+            android:title="第一项" />
+        <item
+            android:id="@+id/menu_2"
+            android:icon="@mipmap/a2"
+            android:title="第二项" />
+    </group>
+</menu>
