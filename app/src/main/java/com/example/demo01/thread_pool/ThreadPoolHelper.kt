@@ -1,13 +1,11 @@
 package com.example.demo01.thread_pool
 
 import android.util.Log
-import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import java.util.concurrent.FutureTask
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
-import java.util.concurrent.locks.ReentrantLock
 
 class ThreadPoolHelper {
 
@@ -82,6 +80,22 @@ class ThreadPoolHelper {
 
 
     data class A(val i:Int)
+
+    fun testCustom() {
+        val threadPoolExecutor = ThreadPoolExecutor(4,50,3,TimeUnit.SECONDS, LinkedBlockingQueue())
+        for (i in 0..6) {
+            threadPoolExecutor.execute {
+                Thread.sleep(5000)
+                Log.d(TAG, "11：" + Thread.currentThread().name)
+            }
+        }
+
+        threadPoolExecutor.execute {
+            Log.d(TAG, "hello：" + Thread.currentThread().name)
+        }
+
+
+    }
 
 
 }

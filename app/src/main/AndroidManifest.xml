@@ -7,7 +7,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- Tell the system this app requires OpenGL ES 2.0. -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:name=".MyApplication"
@@ -20,10 +23,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Demo01"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".activity.NavigationActivity"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.AppCompat" />-->
+        <activity
+            android:name=".activity.GLActivity"
+            android:theme="@style/Theme.AppCompat"
+            android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".activity.NavigationActivity" -->
+        <!-- android:exported="false" -->
+        <!-- android:theme="@style/Theme.AppCompat" /> -->
         <activity
             android:name=".activity.Main3Activity"
             android:exported="false"
@@ -56,8 +63,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.StubActivity"
-            android:theme="@style/Theme.AppCompat"/>
+        <activity
+            android:name=".activity.StubActivity"
+            android:theme="@style/Theme.AppCompat" />
 
         <service android:name=".service.HelloService" />
         <service android:name=".service.HelloIntentService" />

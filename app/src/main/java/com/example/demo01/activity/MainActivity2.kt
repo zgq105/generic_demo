@@ -1,6 +1,7 @@
 package com.example.demo01.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
@@ -9,7 +10,10 @@ import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
+import android.os.Message
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
@@ -29,7 +33,12 @@ import com.example.demo01.MyButton
 import com.example.demo01.MyHandlerThread
 import com.example.demo01.MyLinerLayout
 import com.example.demo01.R
+import com.example.demo01.Test
+import com.example.demo01.cpu.CpuTestHelper
 import com.example.demo01.glide.GlideHelper
+import com.example.demo01.hashtable.HashTableHelper
+import com.example.demo01.jvm.MyClassLoad
+import com.example.demo01.leakcanary.FileDescriptorHelper
 import com.example.demo01.leakcanary.LeakCanaryHelper
 import com.example.demo01.retrofit.RetrofitHelper
 import com.example.demo01.service.HelloService
@@ -79,8 +88,8 @@ class MainActivity2 : AppCompatActivity() {
         Log.d("zgq", "onCreate-width:" + button.width)
         button.setOnClickListener {
 //            test2()
-            startActivity(Intent(this, NavigationActivity::class.java))
-//            startService(Intent(this, HelloService::class.java))
+            startActivity(Intent(this, Main3Activity::class.java))
+            //startService(Intent(this, HelloService::class.java))
             //startService(Intent(this, HelloIntentService::class.java))
             //bindService(Intent(this,MyService::class.java),serviceConnection, Context.BIND_AUTO_CREATE)
             //startService(Intent(this, MyForegroundService::class.java))
@@ -107,13 +116,22 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         // 注册广播接收器
-        val filter = IntentFilter("com.example.ACTION_FROM_SERVICE")
-        registerReceiver(resultReceiver, filter)
+//        val filter = IntentFilter("com.example.ACTION_FROM_SERVICE")
+//        registerReceiver(resultReceiver, filter)
 
 
         val myBtn = findViewById<MyButton>(R.id.my_btn)
         myBtn.setOnClickListener {
-            test2()
+//            testGlideHelper()
+            //mainHandler.sendEmptyMessage(0)
+//            FileDescriptorHelper.testNetConnect()
+//            FileDescriptorHelper.testFileIo(this)
+//            CpuTestHelper.cpuTest()
+//            CpuTestHelper.i = 0
+//            CpuTestHelper.cpuTest2()
+//            CpuTestHelper.cpuTest3()
+            HashTableHelper.test()
+
         }
 
         val myLiner = findViewById<MyLinerLayout>(R.id.myLiner)
@@ -136,10 +154,10 @@ class MainActivity2 : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        ThreadPoolHelper().test()
-        GlobalScope.launch {
-            LeakCanaryHelper.testReferenceQueueUsage()
-        }
+        //ThreadPoolHelper().testCustom()
+//        GlobalScope.launch {
+//            LeakCanaryHelper.testWeakReference()
+//        }
         val getJniData = NativeLib().getParamsFromClassObj(NativeLib.ClassObj())
         Toast.makeText(this@MainActivity2, getJniData, Toast.LENGTH_SHORT).show()
     }
@@ -190,9 +208,21 @@ class MainActivity2 : AppCompatActivity() {
     }
 
 
-    private fun test2() {
+    private fun testGlideHelper() {
         val imageView = findViewById<ImageView>(R.id.iv)
         GlideHelper.loadImage(this, imageView)
+    }
+
+    private val mainHandler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            //模拟内存抖动操作：短期内大量对象进入新生代，触发频繁GC
+            for (i in 0..1000) {
+                val arr = intArrayOf(100)
+                arr[0] = 10
+            }
+            sendEmptyMessage(0)
+        }
     }
 
 

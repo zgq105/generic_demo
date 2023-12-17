@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.demo01.R
 import com.example.demo01.glide.GlideHelper
+import java.util.UUID
 
 class FirstFragment : Fragment() {
 
@@ -37,7 +38,10 @@ class FirstFragment : Fragment() {
 
     private fun loadImage() {
         val imageView = rootView.findViewById<ImageView>(R.id.iv)
-        GlideHelper.loadImage(this.requireContext(), imageView,
-            "https://img95.699pic.com/photo/50136/1351.jpg_wh300.jpg?pa=123")
+        GlideHelper.loadImage(
+            this.requireContext(), imageView,
+            "https://img95.699pic.com/photo/50136/1351.jpg_wh300.jpg?ra=" + UUID.randomUUID()
+                .toString()
+        )
     }
 }

@@ -4,11 +4,29 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <map>
+
 using namespace std;
 
+#define LENGTH 10; //定义常量
+#define MIN(a, b) (a<b ? a : b) //参数宏
+const int WIDTH = 5;
+
+//条件编译
+#ifdef NULL
+#define NULL 0
+#endif
+
+// 函数声明
 void testPointer();
+
 void foo(int *ptr);
+
 void testMemoryManagement();
+
+void test();
+
+void dynamicMemoryUsage();
 
 char *const TAG = "JNI";
 
@@ -16,6 +34,42 @@ struct Point {
     int x;
     int y;
 };
+
+enum Color {
+    red, green, blue
+};
+
+//抽象类：存在至少一个纯虚函数的类
+class ABSClass {
+public:
+    // 纯虚函数
+    virtual double getVolume() = 0;
+};
+
+class MyClass {
+public:
+    static int callCount;//静态变量
+    int publicVar; //可以在类的外部访问
+    // 成员函数（方法）
+    void f1() {
+        cout << "Value of i : " << this->protectedVar << this->p2 << endl;;
+    }
+
+private:
+    int privateVar;//只能在类的内部访问
+    double p2;
+protected:
+    int protectedVar;//在类的内部和派生类中可访问
+
+};
+
+class MyClassChild : MyClass {
+public:
+    void f1() {
+        this->protectedVar; //访问父类的变量
+    }
+};
+
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_example_nativelib_1m3_NativeLib_stringFromJNI(
@@ -119,13 +173,78 @@ void testMemoryManagement() {
     numbers.insert(numbers.begin() + 2, 10);
     numbers.push_back(9);
 
-    list<int> list = {1,2};
+    list<int> list = {1, 2};
     list.push_back(1);
     list.pop_back();
     std::list<int>::iterator it = list.begin();
-    while (it != list.end()){
+    while (it != list.end()) {
         //遍历迭代器
     }
+
+    //说明vector是动态数组，采用数组的数据结构实现；list是采用链表数据结构实现
+
+    map<string, int> m = {};
+    m["key"] = 10;
+    m.find("key");
 }
+
+void test() {
+    Color myColor = red;
+    sin(3.24);
+    cos(2.0);
+    int *ptr = nullptr;
+    int *ptr2 = NULL;
+    // 声明简单的变量
+    int i;
+    // 声明引用变量
+    int &r = i; //i和r指向同一个内存地址
+    i = 5;
+    cout << "Value of i : " << i << endl;
+    cout << "Value of i reference : " << r << endl;
+
+    // 基于当前系统的当前日期/时间
+    time_t now = time(0);
+    // 把 now 转换为字符串形式
+    char *dt = ctime(&now);
+    cout << "本地日期和时间：" << dt << endl;
+
+
+    try {
+        MyClass myClass;
+        myClass.f1();
+    } catch (exception e) {
+
+    }
+}
+
+/**
+ * c++动态内存使用
+ */
+void dynamicMemoryUsage() {
+
+    //1.基础类型动态内存使用：
+    double *pValue  = nullptr; // 初始化为 null 的指针
+    pValue  = new double;   // 为变量请求内存
+
+    *pValue = 29494.99;     // 在分配的地址存储值
+    cout << "Value of pValue : " << *pValue << endl;
+
+    delete pValue;         // 释放内存
+
+    //2.数组类型
+    // 动态分配,数组长度为 20
+    int *array = new int[20];
+    //释放内存
+    delete[] array;
+
+    //3.对象的动态内存分配
+    MyClass *myBoxArray = new MyClass[4];
+
+    delete[] myBoxArray; // 删除数组
+
+
+}
+
+
 
 

@@ -2,6 +2,7 @@ package com.example.demo01.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -18,20 +19,14 @@ class ExampleFragment: Fragment(R.layout.example_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("zgq", arguments?.getString("key1").toString())
-        viewModel.testData.value = "hello"
+    }
 
-        lifecycleScope.launch {
-            val deferred = async(Dispatchers.IO) {
-                // 在 IO 线程中执行耗时操作
-                //fetchData()
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-            // 等待异步操作完成，并获取结果
-            val result = deferred.await()
-
-            // 在主线程中更新 UI
-            //textView.text = result
+        viewModel.testData.value = "hello world"
+        viewModel.testData.observe(viewLifecycleOwner) {
+            Log.d("zgq", "testData:$it")
         }
     }
 }

@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import com.example.demo01.R
+import com.example.demo01.fragment.ExampleFragment
 import com.example.module1.IMyAidlInterface
 import com.example.module1.IResponse
 import com.example.module1.Person
@@ -21,15 +23,15 @@ class Main3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main3)
         if (savedInstanceState == null) {
-//            supportFragmentManager.commit {
-//                setReorderingAllowed(true)
-//                add(R.id.fragment_container_view, ExampleFragment().apply {
-//                    arguments = Bundle().apply {
-//                        putString("key1", "zgq")
-//                    }
-//                })
-//                addToBackStack("fr1")
-//            }
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add(R.id.fragment_container_view, ExampleFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("key1", "zgq")
+                    }
+                })
+                addToBackStack("fr1")
+            }
 //            supportFragmentManager.commit {
 //                setReorderingAllowed(true)
 //                add(R.id.fragment_container_view, Example2Fragment().apply {

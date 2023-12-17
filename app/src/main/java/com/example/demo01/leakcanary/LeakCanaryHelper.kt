@@ -2,9 +2,11 @@ package com.example.demo01.leakcanary
 
 import android.util.Log
 import kotlinx.coroutines.delay
-import java.lang.ref.Reference
+import java.io.SequenceInputStream
 import java.lang.ref.ReferenceQueue
 import java.lang.ref.WeakReference
+import java.util.WeakHashMap
+
 
 object LeakCanaryHelper {
 
@@ -26,5 +28,25 @@ object LeakCanaryHelper {
         } else {
             Log.d(TAG, "Object has not been collected")
         }
+    }
+
+    data class MyObject(val data: String)
+
+    suspend fun testWeakReference() {
+        var myObject: MyObject? = MyObject("Hello, WeakReference!")
+        val weakRef = WeakReference(myObject)
+        // 输出对象的数据
+        Log.d(TAG,"Data from object: " + myObject?.data)
+        Log.d(TAG,"Data from weak reference: " + weakRef.get()?.data)
+
+        // 执行垃圾回收
+        System.gc()
+        delay(4000)
+        Log.d(TAG,"Data from weak reference after GC: " + weakRef.get()?.data)
+
+        val weakHashMap = WeakHashMap<String,String>()
+        weakHashMap["1"] = "2"
+
+
     }
 }
