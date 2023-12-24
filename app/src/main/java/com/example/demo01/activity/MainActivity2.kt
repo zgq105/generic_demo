@@ -29,6 +29,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import com.example.common.IMyService
+import com.example.common.ServiceGetter
 import com.example.demo01.MyButton
 import com.example.demo01.MyHandlerThread
 import com.example.demo01.MyLinerLayout
@@ -58,6 +60,9 @@ class MainActivity2 : AppCompatActivity() {
 
     private val myHandlerThread = MyHandlerThread("test")
 
+    private lateinit var aa:String
+    private val bb by lazy { "hello" }
+
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             val binder = service as MyService1.MyBinder
@@ -82,17 +87,15 @@ class MainActivity2 : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        aa = "1"
         Log.d("zgq", "MainActivity2 onCreate")
         setContentView(R.layout.activity_main)
         button = findViewById<Button>(R.id.btn)
         Log.d("zgq", "onCreate-width:" + button.width)
         button.setOnClickListener {
-//            test2()
-            startActivity(Intent(this, Main3Activity::class.java))
-            //startService(Intent(this, HelloService::class.java))
-            //startService(Intent(this, HelloIntentService::class.java))
-            //bindService(Intent(this,MyService::class.java),serviceConnection, Context.BIND_AUTO_CREATE)
-            //startService(Intent(this, MyForegroundService::class.java))
+            //startActivity(Intent(this, Main3Activity::class.java))
+            val myService = ServiceGetter.getService(IMyService::class.java)
+            myService?.test()
         }
         findViewById<Button>(R.id.btn_stop).setOnClickListener {
 //            val view = View.inflate(this,R.layout.example2_fragment,null)

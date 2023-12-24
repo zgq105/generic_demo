@@ -5,7 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
+import android.os.Message
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -30,7 +33,7 @@ class Main3Activity : AppCompatActivity() {
                         putString("key1", "zgq")
                     }
                 })
-                addToBackStack("fr1")
+                //addToBackStack("fr1")
             }
 //            supportFragmentManager.commit {
 //                setReorderingAllowed(true)
@@ -57,7 +60,7 @@ class Main3Activity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        bindService(Intent(this, RemoteService::class.java), conn, Context.BIND_AUTO_CREATE)
+        //bindService(Intent(this, RemoteService::class.java), conn, Context.BIND_AUTO_CREATE)
     }
 
     private var serviceObj: IMyAidlInterface? = null

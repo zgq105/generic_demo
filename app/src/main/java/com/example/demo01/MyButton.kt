@@ -8,6 +8,10 @@ import android.view.MotionEvent
 class MyButton(context: Context, attrs: AttributeSet) :
     androidx.appcompat.widget.AppCompatButton(context, attrs) {
 
+    companion object {
+        const val TAG = "123"
+    }
+
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
         return super.dispatchTouchEvent(event)
     }

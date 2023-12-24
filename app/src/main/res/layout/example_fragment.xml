@@ -18,4 +18,11 @@
         app:customTitle="组合自定义属性"
         app:customIcon="@drawable/ic_launcher_background"
         />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_open"
+        android:text="打开"
+        />
 </LinearLayout>

@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class TestJava {
 
+    private static final String TAG = "TestJava";
     private void test() {
 
     }

@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class FragmentShareDataViewModel : ViewModel() {
 
-    val testData = MutableLiveData<String>("")
+    val testData by lazy { MutableLiveData("") }
 
     fun test() {
         val job = viewModelScope.launch {
